@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bazar do Luiz</title>
+<meta name="description" content="Vitrine de itens à venda com pedido pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<header class="loja"><div class="wrap">
+  <h1 id="nome-loja">Carregando…</h1>
+  <p id="desc-loja"></p>
+  <a id="contato" class="contato" href="#" target="_blank" rel="noopener" hidden></a>
+</div></header>
+
+<div class="barra"><div class="wrap">
+  <div class="linha">
+    <input id="busca" class="busca" type="search" placeholder="Buscar item…" aria-label="Buscar item">
+    <select id="ordem" class="ordem" aria-label="Ordenar">
+      <option value="padrao">Mais recentes</option>
+      <option value="menor">Menor preço</option>
+      <option value="maior">Maior preço</option>
+    </select>
+  </div>
+  <div id="chips" class="chips" role="toolbar" aria-label="Filtrar por tipo"></div>
+</div></div>
+
+<main><div class="wrap">
+  <p id="resumo" class="resumo"></p>
+  <div id="grade" class="grade"></div>
+</div></main>
+<footer><div class="wrap">Para comprar, toque em “Quero comprar” e fale comigo no WhatsApp.</div></footer>
+
+
+</body>
+</html>

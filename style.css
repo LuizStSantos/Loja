@@ -1,0 +1,73 @@
+/* Bazar do Luiz — estilos da vitrine */
+/* Layout: cabeçalho da loja, barra de filtros fixa, grade de "etiquetas" de produto */
+:root{
+  --bg:#eef1ec; --surface:#ffffff; --ink:#1b2420; --muted:#5d6a63; --line:#d5dcd6;
+  --accent:#12704a; --accent-ink:#ffffff; --accent-soft:#dcefe4;
+  --tag:#f3d27a; --tag-ink:#3a2d05; --sold:#b53a2f;
+  --ph-1:#cfe3d7; --ph-2:#e6dcc4; --ph-3:#d4dcec; --ph-4:#ecd3cf;
+  --f-display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121815; --surface:#1b2320; --ink:#e7eee9; --muted:#9aa9a1; --line:#2c3833;
+  --accent:#3ccf8e; --accent-ink:#06170f; --accent-soft:#1d3a2c;
+  --tag:#e2bd55; --tag-ink:#2a2003; --sold:#ff7b6e;
+  --ph-1:#23392d; --ph-2:#3a3324; --ph-3:#252f40; --ph-4:#3d2a27; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#121815; --surface:#1b2320; --ink:#e7eee9; --muted:#9aa9a1; --line:#2c3833;
+  --accent:#3ccf8e; --accent-ink:#06170f; --accent-soft:#1d3a2c;
+  --tag:#e2bd55; --tag-ink:#2a2003; --sold:#ff7b6e;
+  --ph-1:#23392d; --ph-2:#3a3324; --ph-3:#252f40; --ph-4:#3d2a27; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
+header.loja{padding-block:36px 20px}
+header.loja h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2rem,6vw,3.4rem);line-height:1;letter-spacing:-.02em;margin:0;text-wrap:balance}
+header.loja p{color:var(--muted);margin:10px 0 0;max-width:60ch}
+.contato{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-weight:600;color:var(--accent);text-decoration:none}
+.contato:hover{text-decoration:underline}
+
+.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:12px}
+.barra .wrap{display:flex;flex-direction:column;gap:10px}
+.linha{display:flex;gap:10px;flex-wrap:wrap}
+.busca{flex:1 1 220px;min-width:0;font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.ordem{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.chip{flex:none;font:inherit;font-size:.9rem;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip span{color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] span{color:var(--bg);opacity:.7}
+.chip:focus-visible,.busca:focus-visible,.ordem:focus-visible,.comprar:focus-visible,.mais:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+main{padding-block:22px 60px}
+.resumo{color:var(--muted);font-size:.9rem;margin:0 0 14px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.foto{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--ph-1);display:grid;place-items:center;overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.foto .letra{font-family:var(--f-display);font-weight:800;font-size:4rem;color:var(--ink);opacity:.35}
+.etiqueta{position:absolute;left:12px;bottom:12px;background:var(--tag);color:var(--tag-ink);font-family:var(--f-display);font-weight:700;font-size:1.15rem;padding:4px 12px 4px 18px;border-radius:4px 8px 8px 4px;font-variant-numeric:tabular-nums;box-shadow:0 2px 6px rgb(0 0 0 / .15)}
+.etiqueta::before{content:"";position:absolute;left:6px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--bg)}
+.vendido-selo{position:absolute;right:12px;top:12px;background:var(--sold);color:#fff;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+.item.vendido .foto img,.item.vendido .foto .letra{filter:grayscale(1);opacity:.55}
+.corpo{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.meta{display:flex;gap:6px;flex-wrap:wrap;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.meta b{color:var(--accent);font-weight:600}
+.item h2{font-family:var(--f-display);font-weight:700;font-size:1.2rem;line-height:1.2;margin:0;text-wrap:balance}
+.desc{color:var(--muted);font-size:.95rem;overflow-wrap:anywhere}
+.desc p{margin:0 0 6px}.desc ul{margin:0 0 6px;padding-left:18px}
+.desc.curta{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mais{align-self:flex-start;background:none;border:0;padding:0;font:inherit;font-size:.85rem;font-weight:600;color:var(--accent);cursor:pointer}
+.comprar{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none}
+.comprar:hover{filter:brightness(1.08)}
+.comprar[aria-disabled="true"]{background:var(--line);color:var(--muted);pointer-events:none}
+.vazio,.aviso{padding:40px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+.aviso{text-align:left}
+footer{color:var(--muted);font-size:.85rem;padding-block:0 30px}
+@media (prefers-reduced-motion:no-preference){.item{transition:transform .15s}.item:hover{transform:translateY(-2px)}}
