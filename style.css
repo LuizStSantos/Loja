@@ -187,6 +187,15 @@ dialog#detalhe::backdrop{background:rgb(0 0 0 / .78);backdrop-filter:blur(3px)}
   .det-info h2{padding-right:0}
   .foto.grande{aspect-ratio:4/3;max-width:none;width:calc(100% + 32px);margin-inline:-16px;margin-top:calc(-16px - env(safe-area-inset-top,0px));border-radius:0}
   .seletor > button{padding-inline:14px}
+  /* Logo ao lado do nome; frase e botões embaixo, na largura toda */
+  .marca{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"logo titulo" "desc desc" "links links";align-items:center;column-gap:14px;row-gap:0}
+  .marca-texto{display:contents}
+  .marca img{grid-area:logo;width:64px}
+  header.loja h1{grid-area:titulo;font-size:clamp(1.7rem,8vw,2.3rem)}
+  header.loja p{grid-area:desc;margin-top:14px}
+  .links{grid-area:links}
+  .chips{scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
 }
 
 @media (prefers-reduced-motion:no-preference){
