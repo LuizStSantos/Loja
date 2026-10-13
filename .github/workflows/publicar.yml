@@ -31,7 +31,7 @@ jobs:
       - name: Separar arquivos do site
         run: |
           mkdir _site
-          cp -r index.html style.css script.js loja.md produtos fotos _site/
+          cp -r index.html style.css script.js loja.md produtos fotos img _site/
           rm -f _site/produtos/_*.md
 
       - uses: actions/configure-pages@v5

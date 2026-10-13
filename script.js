@@ -154,7 +154,6 @@ async function iniciar(){
   let loja_;
   try { loja_ = lerLoja(await baixar(ARQUIVO_LOJA)); }
   catch(e){
-    document.getElementById("nome-loja").textContent="Loja";
     document.getElementById("grade").innerHTML=`<div class="aviso" style="grid-column:1/-1">
       Não consegui abrir o arquivo <strong>${ARQUIVO_LOJA}</strong>. Confira se ele está na mesma pasta do index.html
       e se o site está publicado (GitHub Pages, Netlify etc.). Abrir o index.html direto do computador não funciona em alguns navegadores.</div>`;
@@ -163,13 +162,19 @@ async function iniciar(){
   const {cfg} = loja_; let {arquivos} = loja_;
   loja=cfg;
   const nome=cfg.loja||"Minha Loja";
-  document.getElementById("nome-loja").textContent=nome;
+  document.getElementById("nome-loja").innerHTML=esc(nome).replace("³",'<sup aria-hidden="true">3</sup><span class="sr">³</span>');
   document.title=nome;
   document.getElementById("desc-loja").textContent=cfg.descricao||"";
   if(cfg.whatsapp){
     const c=document.getElementById("contato");
     const n=cfg.whatsapp.replace(/\D/g,"");
-    c.href=`https://wa.me/${n}`; c.textContent=`WhatsApp: +${n}`; c.hidden=false;
+    c.href=`https://wa.me/${n}`; c.querySelector("span").textContent="WhatsApp"; c.hidden=false;
+  }
+  if(cfg.instagram){
+    const u=cfg.instagram.replace(/^.*instagram\.com\//i,"").replace(/[@/]/g,"");
+    const ig=document.getElementById("instagram");
+    ig.href=`https://www.instagram.com/${u}/`; ig.querySelector("span").textContent="@"+u; ig.hidden=false;
+    const f=document.getElementById("rodape-ig"); if(f){ f.href=ig.href; f.textContent="@"+u; }
   }
 
   // Lista gerada pelo GitHub; se não existir, usa a lista escrita no loja.md

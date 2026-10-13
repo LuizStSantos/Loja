@@ -1,4 +1,4 @@
-# Bazar do Luiz
+# 3D³ Creative
 
 Vitrine de itens à venda. Cada produto é um arquivo Markdown, o visitante filtra por tipo e o botão **Quero comprar** abre o WhatsApp com uma mensagem pronta.
 
@@ -38,7 +38,7 @@ Os itens mais novos aparecem primeiro. Arquivos que começam com `_` são ignora
 
 ## Configuração
 
-Nome da loja, número do WhatsApp e a frase de apresentação ficam no `loja.md`.
+Nome da loja, WhatsApp, Instagram e a frase de apresentação ficam no `loja.md`.
 
 ## Como funciona
 
