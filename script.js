@@ -291,7 +291,7 @@ let abertoPorClique = false;
 
 function abrirDetalhe(it){
   const miniaturas = it.fotos.length > 1
-    ? `<div class="miniaturas">${it.fotos.map((f, i) => `<button type="button" aria-label="Ver foto ${i+1}" aria-current="${i === 0}"><img src="${esc(f)}" alt="" loading="lazy"></button>`).join("")}</div>` : "";
+    ? `<div class="miniaturas">${it.fotos.map((f, i) => `<button type="button" aria-label="Ver foto ${i+1}" aria-current="${i === 0}"><img src="${esc(f)}" alt="" loading="lazy" data-letra="${i+1}"></button>`).join("")}</div>` : "";
   const videos = it.videos.length
     ? `<section class="det-videos"><h3>Vídeo${it.videos.length > 1 ? "s" : ""}</h3>${it.videos.map(embedYoutube).join("")}</section>` : "";
   $("det-conteudo").innerHTML = `
@@ -357,6 +357,37 @@ function seguirEndereco(){
   else if(dlg.open){ abertoPorClique = false; dlg.close(); }
 }
 window.addEventListener("hashchange", seguirEndereco);
+
+/* ---------- Barra de rolagem no celular ----------
+   Navegadores de celular não deixam estilizar a barra nativa, então desenhamos uma:
+   um traço fino que aparece ao rolar e some depois. Só em telas de toque. */
+function indicadorRolagem(rolavel, onde, fixo){
+  const barra = document.createElement("div");
+  barra.className = "rolagem" + (fixo ? " fixa" : "");
+  barra.setAttribute("aria-hidden", "true");
+  barra.innerHTML = "<i></i>";
+  onde.appendChild(barra);
+  const polegar = barra.firstChild;
+  const doc = rolavel === window ? document.documentElement : rolavel;
+  let tempo;
+  const atualizar = () => {
+    const total = doc.scrollHeight, visivel = rolavel === window ? window.innerHeight : doc.clientHeight;
+    if(total <= visivel + 2){ barra.classList.remove("ver"); return; }
+    const trilho = barra.clientHeight;
+    const altura = Math.max(36, trilho * visivel / total);
+    const pos = (trilho - altura) * (rolavel === window ? window.scrollY : doc.scrollTop) / (total - visivel);
+    polegar.style.height = altura + "px";
+    polegar.style.transform = `translateY(${pos}px)`;
+    barra.classList.add("ver");
+    clearTimeout(tempo); tempo = setTimeout(() => barra.classList.remove("ver"), 900);
+  };
+  rolavel.addEventListener("scroll", () => requestAnimationFrame(atualizar), { passive: true });
+}
+if(matchMedia("(hover: none) and (pointer: coarse)").matches){
+  document.documentElement.classList.add("toque");
+  indicadorRolagem(window, document.body, true);
+  indicadorRolagem($("det-conteudo"), dlg.querySelector(".det-caixa"), false);
+}
 
 /* ---------- Início ---------- */
 const baixar = url => fetch(url, { cache: "no-store" }).then(r => { if(!r.ok) throw new Error(url); return r.text(); });

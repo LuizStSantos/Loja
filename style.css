@@ -30,6 +30,13 @@ img{max-width:100%}
 ::-webkit-scrollbar-corner{background:transparent}
 @supports (-moz-appearance:none){ *{scrollbar-width:thin;scrollbar-color:#3a3a40 transparent} }
 html{background:var(--bg)}
+/* Celular: esconde a barra do sistema e usa a nossa (script.js) */
+.toque, .toque *{scrollbar-width:none}
+.toque ::-webkit-scrollbar{display:none}
+.rolagem{position:absolute;top:6px;bottom:6px;right:2px;width:4px;z-index:50;pointer-events:none;opacity:0;transition:opacity .35s}
+.rolagem.fixa{position:fixed;top:calc(6px + env(safe-area-inset-top,0px));bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+.rolagem.ver{opacity:1;transition-duration:.1s}
+.rolagem i{display:block;width:100%;border-radius:999px;background:var(--accent);opacity:.75;will-change:transform}
 :where(a,button,[tabindex]):focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
 /* ---------- Cabeçalho ---------- */
@@ -150,6 +157,7 @@ dialog#detalhe::backdrop{background:rgb(0 0 0 / .78);backdrop-filter:blur(3px)}
 .miniaturas button{flex:none;width:68px;height:68px;padding:0;border:2px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface);cursor:pointer}
 .miniaturas button[aria-current="true"]{border-color:var(--accent)}
 .miniaturas img{width:100%;height:100%;object-fit:cover;display:block}
+.miniaturas .letra{font-size:1.1rem;opacity:.5}
 .det-info{display:flex;flex-direction:column;gap:12px;min-width:0;padding-top:8px}
 .det-info h2{font-family:var(--f-display);font-weight:800;font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.1;letter-spacing:-.01em;margin:0;padding-right:44px;text-wrap:balance}
 .det-preco{margin:0;font-family:var(--f-display);font-weight:700;font-size:1.6rem;color:var(--accent);font-variant-numeric:tabular-nums}
@@ -178,7 +186,7 @@ dialog#detalhe::backdrop{background:rgb(0 0 0 / .78);backdrop-filter:blur(3px)}
 .tabela th,.tabela td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
 .tabela tr:last-child td{border-bottom:0}
 .tabela th{background:var(--surface);font-weight:600;color:var(--ink)}
-.tabela td:first-child{color:var(--muted)}
+.tabela td:first-child{color:var(--muted);white-space:nowrap}
 .det-videos{max-width:820px}
 .det-videos h3{margin-top:0}
 .video{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:14px;overflow:hidden;background:#000;margin:0 0 14px}
