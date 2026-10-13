@@ -6,7 +6,8 @@
 <title>3D³ Creative</title>
 <meta name="description" content="Peças impressas em 3D da 3D³ Creative. Escolha o item e peça pelo WhatsApp.">
 <meta name="theme-color" content="#111112">
-<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icone-192.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta property="og:title" content="3D³ Creative">
 <meta property="og:description" content="Peças impressas em 3D. Escolha o item e peça pelo WhatsApp.">
@@ -21,7 +22,7 @@
 <body>
 <header class="loja"><div class="wrap">
   <div class="marca">
-    <img src="img/logo.png" alt="Logo 3D³ Creative" width="112" height="112">
+    <img src="img/logo.png" alt="Logo 3D³ Creative" width="120" height="120">
     <div class="marca-texto">
       <h1 id="nome-loja">3D<sup aria-hidden="true">3</sup><span class="sr">³</span> Creative</h1>
       <p id="desc-loja"></p>
@@ -36,11 +37,13 @@
 <div class="barra"><div class="wrap">
   <div class="linha">
     <input id="busca" class="busca" type="search" placeholder="Buscar item…" aria-label="Buscar item">
-    <select id="ordem" class="ordem" aria-label="Ordenar">
-      <option value="padrao">Mais recentes</option>
-      <option value="menor">Menor preço</option>
-      <option value="maior">Maior preço</option>
-    </select>
+    <div id="ordem" class="seletor">
+      <button type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Ordenar">
+        <span class="rotulo">Mais recentes</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul role="listbox" tabindex="-1" aria-label="Ordenar" hidden></ul>
+    </div>
   </div>
   <div id="chips" class="chips" role="toolbar" aria-label="Filtrar por tipo"></div>
 </div></div>
@@ -51,6 +54,13 @@
 </div></main>
 <footer><div class="wrap">Para comprar, toque em “Quero comprar” e fale com a gente no WhatsApp. Acompanhe as novidades no Instagram <a id="rodape-ig" href="https://www.instagram.com/3d3_creative/" target="_blank" rel="noopener">@3d3_creative</a>.</div></footer>
 
-
+<dialog id="detalhe" aria-labelledby="det-titulo">
+  <div class="det-caixa">
+    <button id="det-fechar" class="det-fechar" type="button" aria-label="Fechar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div id="det-conteudo" class="det-conteudo" tabindex="-1"></div>
+  </div>
+</dialog>
 </body>
 </html>

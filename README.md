@@ -4,24 +4,32 @@ Vitrine de itens à venda. Cada produto é um arquivo Markdown, o visitante filt
 
 ## Postar um item
 
-1. Na pasta `produtos/`, copie o `_modelo.md` e dê um nome novo, por exemplo `geladeira-brastemp.md`.
-2. Preencha os dados e a descrição.
-3. Se tiver foto, envie para a pasta `fotos/` e coloque o caminho em `imagem:`.
+1. Na pasta `produtos/`, copie o `_modelo.md` e dê um nome novo, por exemplo `luminaria-lua.md`. Esse nome também vira o link do item: `.../Loja/#luminaria-lua`.
+2. Envie as fotos para a pasta `fotos/`.
+3. Preencha os dados e a descrição.
 4. Salve (commit). Em cerca de um minuto o site é atualizado.
 
 ```markdown
 ---
-titulo: Geladeira Brastemp 375 L
-tipo: Eletrodomésticos
-preco: 1.400,00
-imagem: fotos/geladeira.jpg
-estado: Usado
-vendido: não
-oculto: não
+titulo: Luminária Lua
+tipo: Decoração
+preco: 90,00
+estado: Novo
+resumo: Textura de superfície lunar, LED com 3 tons.
+fotos:
+  - fotos/luminaria-lua-1.jpg
+  - fotos/luminaria-lua-2.jpg
+video: https://youtu.be/CODIGO
 ---
 
-Frost free, 110 V. Funcionando perfeitamente.
-- Retirada no local
+Texto de apresentação.
+
+## Especificações
+
+| Item     | Detalhe   |
+|----------|-----------|
+| Tamanho  | 12 cm     |
+| Energia  | Cabo USB  |
 ```
 
 | Campo     | Para que serve |
@@ -29,10 +37,23 @@ Frost free, 110 V. Funcionando perfeitamente.
 | `titulo`  | Nome do item |
 | `tipo`    | Categoria; os botões de filtro são criados a partir dela |
 | `preco`   | Valor em reais (`850`, `850,00` ou `1.200,50`). Sem preço aparece "Consulte" |
-| `imagem`  | Caminho da foto (`fotos/...`) ou link de uma imagem |
-| `estado`  | Novo, Seminovo, Usado… |
+| `estado`  | Novo, Seminovo, Sob encomenda… |
+| `resumo`  | Frase curta do cartão. Sem ela, o cartão usa o primeiro parágrafo do texto |
+| `fotos`   | Uma ou mais fotos, em lista (como acima) ou separadas por vírgula. A primeira é a capa. `imagem:` também funciona para uma foto só |
+| `video`   | Link do YouTube (normal, `youtu.be` ou Shorts). Para vários, use lista, como nas fotos |
 | `vendido` | `sim` deixa o item em cinza com o selo "Vendido" |
 | `oculto`  | `sim` tira o item do site sem apagar o arquivo |
+
+### Página de detalhes
+
+Clicar na foto, no nome ou em **Ver detalhes** abre a página do item, com todas as fotos, o vídeo e o texto completo. O texto aceita:
+
+- títulos (`## Especificações`)
+- listas (`- item` ou `1. item`)
+- tabelas (`| Item | Detalhe |`)
+- fotos no meio do texto (`![descrição](fotos/arquivo.jpg)`)
+- **negrito**, *itálico*, links e citações (`> dica`)
+- um link do YouTube sozinho numa linha vira vídeo
 
 Os itens mais novos aparecem primeiro. Arquivos que começam com `_` são ignorados.
 
